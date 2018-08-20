@@ -19,20 +19,25 @@ class ViewController: UIViewController {
         case nought = "nought.png"
     }
     var playersTurn = player.first
-    var imageString = "nought.png"
+    var imageString = image.cross
     
     @IBAction func buttonPressed(_ sender: UIButton) {
+        
+        sender.setImage(UIImage(named: imageString.rawValue), for: .normal)
+        
         switch playersTurn {
         case .first:
             playersTurn = .second
-            
+            imageString = .nought
             print("First player's turn is over")
         case .second:
             playersTurn = .first
+            imageString = .cross
             print("Second player's turn is over")
         }
         print(sender.tag)
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
