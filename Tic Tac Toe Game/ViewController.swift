@@ -24,6 +24,7 @@ class ViewController: UIViewController {
     @IBAction func buttonPressed(_ sender: UIButton) {
         
         sender.setImage(UIImage(named: imageString.rawValue), for: .normal)
+        sender.isEnabled = false
         
         switch playersTurn {
         case .first:
