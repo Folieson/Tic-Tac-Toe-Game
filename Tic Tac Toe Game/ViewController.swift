@@ -10,34 +10,36 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    enum player {
-        case first
-        case second
+    // first - cross, second - nought
+    enum player: Int {
+        case first = 1
+        case second = 2
     }
-    enum image: String {
-        case cross = "cross.png"
-        case nought = "nought.png"
-    }
+// 0 - empty
+    var buttonsState = [0,0,0,0,0,0,0,0,0]
     var playersTurn = player.first
-    var imageString = image.cross
+
     
     @IBAction func buttonPressed(_ sender: UIButton) {
-        
-        sender.setImage(UIImage(named: imageString.rawValue), for: .normal)
-        sender.isEnabled = false
-        
-        switch playersTurn {
-        case .first:
-            playersTurn = .second
-            imageString = .nought
-            print("First player's turn is over")
-        case .second:
-            playersTurn = .first
-            imageString = .cross
-            print("Second player's turn is over")
+        let positionInButtonState = sender.tag-1
+        if buttonsState[positionInButtonState] == 0 {
+            switch playersTurn {
+            case .first:
+                buttonsState[positionInButtonState] = playersTurn.rawValue
+                playersTurn = .second
+                sender.setImage(UIImage(named: "cross.png"), for: [])
+                print("First player's turn is over")
+            case .second:
+                buttonsState[positionInButtonState] = playersTurn.rawValue
+                playersTurn = .first
+                sender.setImage(UIImage(named: "nought.png"), for: [])
+                print("Second player's turn is over")
+            }
+            print(sender.tag)
         }
-        print(sender.tag)
+        
     }
+
     
     
     override func viewDidLoad() {
