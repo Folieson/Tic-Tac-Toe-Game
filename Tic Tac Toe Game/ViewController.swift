@@ -48,14 +48,12 @@ class ViewController: UIViewController {
                 playersTurn = .second
                 sender.setImage(UIImage(named: "cross.png"), for: [])
                 checkWinningCombinations(for: "Crosses")
-                checkButtonState()
                 print("First player's turn is over")
             case .second:
                 buttonsState[positionInButtonState] = playersTurn.rawValue
                 playersTurn = .first
                 sender.setImage(UIImage(named: "nought.png"), for: [])
                 checkWinningCombinations(for: "Noughtes")
-                checkButtonState()
                 print("Second player's turn is over")
             }
             print(sender.tag)
@@ -68,6 +66,10 @@ class ViewController: UIViewController {
         for combination in winningCombinations {
             if buttonsState[combination[0]] != 0 && buttonsState[combination[0]] == buttonsState[combination[1]] && buttonsState[combination[1]] == buttonsState[combination[2]] {
                 endGame(for: winner)
+                break
+                //проверка на заполненность игрового поля
+            } else  if !buttonsState.contains(0) {
+                endGame(for: "No one")
             }
         }
     }
@@ -81,12 +83,6 @@ class ViewController: UIViewController {
             self.congratulationLabel.center = CGPoint(x: self.congratulationLabel.center.x + 500, y: self.congratulationLabel.center.y)
             self.playAgainButton.center = CGPoint(x: self.playAgainButton.center.x + 500, y: self.playAgainButton.center.y)
         })
-    }
-    
-    func checkButtonState () {
-        if !buttonsState.contains(0) {
-            endGame(for: "No one")
-        }
     }
     
     
