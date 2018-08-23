@@ -11,13 +11,13 @@ import UIKit
 class ViewController: UIViewController {
 
     // first - cross, second - nought
-    enum player: Int {
+    enum Player: Int {
         case first = 1
         case second = 2
     }
 // 0 - empty
     var buttonsState = [0,0,0,0,0,0,0,0,0]
-    var playersTurn = player.first
+    var playersTurn: Player = .first
     let winningCombinations = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]]
     var activeGame = true
     
@@ -30,7 +30,7 @@ class ViewController: UIViewController {
         congratulationLabel.isHidden = true
         activeGame = true
         buttonsState = [0,0,0,0,0,0,0,0,0]
-        playersTurn = player.first
+        playersTurn = .first
         for i in 1...9 {
             if let button = view.viewWithTag(i) as? UIButton {
                 button.setImage(nil, for: [])
